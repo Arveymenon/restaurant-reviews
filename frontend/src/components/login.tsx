@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Login = props => {
+const Login = (props: any) => {
 
   const initialUserState = {
     name: "",
@@ -9,7 +9,7 @@ const Login = props => {
 
   const [user, setUser] = useState(initialUserState);
 
-  const handleInputChange = event => {
+  const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };

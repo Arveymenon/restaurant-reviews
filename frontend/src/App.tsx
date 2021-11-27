@@ -8,14 +8,14 @@ import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
 
 function App() {
-  const [user, setUser] = React.useState(null);
+  const [user , setUser] = React.useState({name: ""});
 
-  async function login(user = null) {
+  async function login(user = {name: ""}) {
     setUser(user);
   }
 
   async function logout() {
-    setUser(null)
+    setUser({name: ""})
   }
 
   return (
@@ -33,7 +33,7 @@ function App() {
           <li className="nav-item" >
             { user ? (
               <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
-                Logout {user.name}
+                Logout {user.name || ""}
               </a>
             ) : (            
             <Link to={"/login"} className="nav-link">

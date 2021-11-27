@@ -2,17 +2,12 @@ import React, { useState, useEffect } from "react";
 import RestaurantDataService from "../services/restaurant";
 import { Link } from "react-router-dom";
 
-const Restaurant = props => {
-  const initialRestaurantState = {
-    id: null,
-    name: "",
-    address: {},
-    cuisine: "",
-    reviews: []
-  };
-  const [restaurant, setRestaurant] = useState(initialRestaurantState);
+import { Restaurant as RestaurantType } from "./restaurants-list";
 
-  const getRestaurant = id => {
+const Restaurant = (props: any) => {
+  const [restaurant, setRestaurant] = useState<RestaurantType>();
+
+  const getRestaurant = (id: any) => {
     RestaurantDataService.get(id)
       .then(response => {
         setRestaurant(response.data);
@@ -27,10 +22,10 @@ const Restaurant = props => {
     getRestaurant(props.match.params.id);
   }, [props.match.params.id]);
 
-  const deleteReview = (reviewId, index) => {
+  const deleteReview = (reviewId: number, index: number) => {
     RestaurantDataService.deleteReview(reviewId, props.user.id)
       .then(response => {
-        setRestaurant((prevState) => {
+        setRestaurant((prevState: any) => {
           prevState.reviews.splice(index, 1)
           return({
             ...prevState
@@ -49,14 +44,14 @@ const Restaurant = props => {
           <h5>{restaurant.name}</h5>
           <p>
             <strong>Cuisine: </strong>{restaurant.cuisine}<br/>
-            <strong>Address: </strong>{restaurant.address.building} {restaurant.address.street}, {restaurant.address.zipcode}
+            {/* <strong>Address: </strong>{restaurant.address.building} {restaurant.address.street}, {restaurant.address.zipcode} */}
           </p>
           <Link to={"/restaurants/" + props.match.params.id + "/review"} className="btn btn-primary">
             Add Review
           </Link>
           <h4> Reviews </h4>
           <div className="row">
-            {restaurant.reviews.length > 0 ? (
+            {restaurant.reviews && restaurant.reviews.length > 0 ? (
              restaurant.reviews.map((review, index) => {
                return (
                  <div className="col-lg-4 pb-1" key={index}>

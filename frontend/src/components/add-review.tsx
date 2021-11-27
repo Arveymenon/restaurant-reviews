@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import RestaurantDataService from "../services/restaurant";
 import { Link } from "react-router-dom";
 
-const AddReview = props => {
+const AddReview = (props: any) => {
   let initialReviewState = ""
 
   let editing = false;
@@ -15,7 +15,7 @@ const AddReview = props => {
   const [review, setReview] = useState(initialReviewState);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleInputChange = event => {
+  const handleInputChange = (event: any) => {
     setReview(event.target.value);
   };
 
@@ -24,7 +24,8 @@ const AddReview = props => {
       text: review,
       name: props.user.name,
       user_id: props.user.id,
-      restaurant_id: props.match.params.id
+      restaurant_id: props.match.params.id,
+      review_id: 0
     };
 
     if (editing) {
