@@ -1,4 +1,14 @@
-"use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,19 +45,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(require("react"));
-var react_router_dom_1 = require("react-router-dom");
-require("./bootstrap/dist/css/bootstrap.min.css");
-var add_review_1 = __importDefault(require("./components/add-review"));
-var restaurants_1 = __importDefault(require("./components/restaurants"));
-var restaurants_list_1 = __importDefault(require("./components/restaurants-list"));
-var login_1 = __importDefault(require("./components/login"));
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import React from "react";
+import { Switch, Route, Link } from "react-router-dom";
+import "./bootstrap/dist/css/bootstrap.min.css";
+import AddReview from "./components/add-review";
+import Restaurant from "./components/restaurants";
+import RestaurantsList from "./components/restaurants-list";
+import Login from "./components/login";
 function App() {
-    var _a = react_1.default.useState({ name: "" }), user = _a[0], setUser = _a[1];
+    var _a = React.useState({ name: "" }), user = _a[0], setUser = _a[1];
     function login(user) {
         if (user === void 0) { user = { name: "" }; }
         return __awaiter(this, void 0, void 0, function () {
@@ -65,37 +72,7 @@ function App() {
             });
         });
     }
-    return (<div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/restaurants" className="navbar-brand">
-          Restaurant Reviews
-        </a>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <react_router_dom_1.Link to={"/restaurants"} className="nav-link">
-              Restaurants
-            </react_router_dom_1.Link>
-          </li>
-          <li className="nav-item">
-            {user ? (<a onClick={logout} className="nav-link" style={{ cursor: 'pointer' }}>
-                Logout {user.name || ""}
-              </a>) : (<react_router_dom_1.Link to={"/login"} className="nav-link">
-              Login
-            </react_router_dom_1.Link>)}
-
-          </li>
-        </div>
-      </nav>
-
-      <div className="container mt-3">
-        <react_router_dom_1.Switch>
-          <react_router_dom_1.Route exact path={["/", "/restaurants"]} component={restaurants_list_1.default}/>
-          <react_router_dom_1.Route path="/restaurants/:id/review" render={function (props) { return (<add_review_1.default {...props} user={user}/>); }}/>
-          <react_router_dom_1.Route path="/restaurants/:id" render={function (props) { return (<restaurants_1.default {...props} user={user}/>); }}/>
-          <react_router_dom_1.Route path="/login" render={function (props) { return (<login_1.default {...props} login={login}/>); }}/>
-        </react_router_dom_1.Switch>
-      </div>
-    </div>);
+    return (_jsxs("div", { children: [_jsxs("nav", __assign({ className: "navbar navbar-expand navbar-dark bg-dark" }, { children: [_jsx("a", __assign({ href: "/restaurants", className: "navbar-brand" }, { children: "Restaurant Reviews" }), void 0), _jsxs("div", __assign({ className: "navbar-nav mr-auto" }, { children: [_jsx("li", __assign({ className: "nav-item" }, { children: _jsx(Link, __assign({ to: "/restaurants", className: "nav-link" }, { children: "Restaurants" }), void 0) }), void 0), _jsx("li", __assign({ className: "nav-item" }, { children: user ? (_jsxs("a", __assign({ onClick: logout, className: "nav-link", style: { cursor: 'pointer' } }, { children: ["Logout ", user.name || ""] }), void 0)) : (_jsx(Link, __assign({ to: "/login", className: "nav-link" }, { children: "Login" }), void 0)) }), void 0)] }), void 0)] }), void 0), _jsx("div", __assign({ className: "container mt-3" }, { children: _jsxs(Switch, { children: [_jsx(Route, { exact: true, path: ["/", "/restaurants"], component: RestaurantsList }, void 0), _jsx(Route, { path: "/restaurants/:id/review", render: function (props) { return (_jsx(AddReview, __assign({}, props, { user: user }), void 0)); } }, void 0), _jsx(Route, { path: "/restaurants/:id", render: function (props) { return (_jsx(Restaurant, __assign({}, props, { user: user }), void 0)); } }, void 0), _jsx(Route, { path: "/login", render: function (props) { return (_jsx(Login, __assign({}, props, { login: login }), void 0)); } }, void 0)] }, void 0) }), void 0)] }, void 0));
 }
 // function test(){
 //   let a =  20;
@@ -105,4 +82,4 @@ function App() {
 //   }
 //   return temp()
 // }
-exports.default = App;
+export default App;
